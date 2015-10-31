@@ -1,29 +1,41 @@
 <?php
 /**
+* Send an email
 * @return boolean
-* @param string
-* @desc Envoie un mail
+* @param string Name of the sender
+* @param string Email of the sender
+* @param string Name of the receiver
+* @param string Email of the receiver
+* @param string Email subject
+* @param string Email HTML content
+* @desc Send an email from the sender email to the receiver email
 */	
-function envoyermail($nom_em, $email_em, $email_dest, $objet,$corps)
-{
-	require("phpgmailer/class.phpgmailer.php");
+function sendHtmlEmail($nameSender, $emailSender, $nameReceiver, $emailReceiver, $subject,$htmlContent)
+{		
+	// Pour envoyer un mail HTML, l'en-tête Content-type doit être défini
+	$headers  = 'MIME-Version: 1.0' . "\r\n";
+    $headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
+    
+    // En-têtes additionnels
+    $headers .= 'To: '.$nameReceiver.' <'.$emailReceiver.'>' . "\r\n";
+    $headers .= 'From: '.$nameSender.' <'.$emailSender.'>' . "\r\n";
 	
-	$mail = new PHPGMailer();
-	$mail->Username = 'info@cyril-grandjean.fr'; 
-	$mail->Password = 'hlyg8q';
-	$mail->From = $email_em; 
-	$mail->FromName = $nom_em;
-	$mail->Subject = $objet;
-	$mail->AddAddress($email_dest);
-	$mail->AddReplyTo($email_em,"Contact");
-	$mail->Body = $corps;
-	if(!$mail->Send())
-	{
-	   echo "Le message n'a pas pu être envoyé<br/ >";
-	   echo "Mailer Error: " . $mail->ErrorInfo;
-	   
-	   return false;
-	}
-	return true;
+	return mail($emailReceiver, $subject, $htmlContent, $headers);
+}
+
+/**
+* Send an email to the administrator
+* @return boolean
+* @param string Name of the sender
+* @param string Email of the sender
+* @param string Name of the receiver
+* @param string Email of the receiver
+* @param string Email subject
+* @param string Email HTML content
+* @desc Send an email from the sender email to the admin email
+*/	
+function sendHtmlEmailToAdmin($nameSender, $emailSender, $subject,$htmlContent)
+{	
+	return sendHtmlEmail($nameSender, $emailSender, $GLOBALS['adminName'], $GLOBALS['adminEmail'], $subject,$htmlContent);	
 }
 ?>

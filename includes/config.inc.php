@@ -8,10 +8,10 @@ include_once ('Mobile_Detect.php');
 
 $detect = new Mobile_Detect();
 
-$dsn = "mysql:dbname=".$_CONFIG['dbname'].";host=".$_CONFIG['dbhost'];
+$dsn = "mysql:dbname=".$GLOBALS['dbname'].";host=".$GLOBALS['dbhost'];
 
 try {
-    $bdd = new PDO($dsn, $_CONFIG['dbuser'], $_CONFIG['dbpassword']);
+    $bdd = new PDO($dsn, $GLOBALS['dbuser'], $GLOBALS['dbpassword']);
 } catch (PDOException $e) {
     echo 'Connection failed';
 }
