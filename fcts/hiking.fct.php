@@ -13,6 +13,7 @@ function isAuthenticated()
 }
 
 /**
+ * To be replaced by an object
 * @return string mail content
 * @param string
 * @desc Return template mail content
@@ -70,4 +71,3 @@ function templateMailContent($hikingName, $hikingDay, $hikingLevel, $hikingDurat
 	ob_end_clean();
 	return $hikingMailContent;
 }
-?>
