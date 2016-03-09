@@ -1,3 +1,4 @@
 **/.DS_Store
 /includes/settings.inc.php
 /nbproject/*
+/hiking/node_modules/*

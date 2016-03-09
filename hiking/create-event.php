@@ -25,123 +25,58 @@ if (isset($_POST_PROTECT['nom']) && isset($_POST_PROTECT['email']) && isset($_PO
   	<?php
 	include 'head.php';
 	?>
+	    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+	    <link rel="stylesheet" href="styles.css">
+	    
+	    <!-- Dependencies: JQuery and GMaps API should be loaded first -->
+		<script src="https://code.jquery.com/jquery-2.2.1.min.js"></script>
+		<script src="http://maps.googleapis.com/maps/api/js?sensor=false"></script>
+	    
+	    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+	
+		<!-- CSS and JS for our code -->
+		<link rel="stylesheet" type="text/css" href="css/jquery-gmaps-latlon-picker.css"/>
+		<script src="js/jquery-gmaps-latlon-picker.js"></script>
+	    
+	    <script type="text/javascript" src="node_modules/moment/min/moment.min.js"></script>
+	    
+	    <link rel="stylesheet" href="node_modules/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css" />
+	    <script type="text/javascript" src="node_modules/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js"></script>
+	    
+	
+	    <!-- 1. Load libraries -->
+	    <!-- IE required polyfills, in this exact order -->
+	    <script src="ie-fix.js"></script>
+	    <script src="https://cdnjs.cloudflare.com/ajax/libs/es6-shim/0.33.3/es6-shim.min.js"></script>
+	    <script src="https://cdnjs.cloudflare.com/ajax/libs/systemjs/0.19.16/system-polyfills.js"></script>
+	
+	    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/2.0.0-beta.6/angular2-polyfills.min.js"></script>
+	    <script src="https://cdnjs.cloudflare.com/ajax/libs/systemjs/0.19.22/system.js"></script>
+	    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/2.0.0-beta.6/Rx.min.js"></script>
+	    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/2.0.0-beta.6/http.min.js"></script>
+	    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/2.0.0-beta.6/angular2.js"></script>
+	
+	    <!-- 2. Configure SystemJS -->
+	    <script>
+	      System.config({
+	        packages: {        
+	          app: {
+	            format: 'register',
+	            defaultExtension: 'js'
+	          }
+	        }
+	      });
+	      System.import('app/main')
+	            .then(null, console.error.bind(console));
+	    </script>
   </head>
-  <body role="document" ng-app="app" ng-controller="CreationEventController">
+  <body>
   	<?php
 	include 'menu.php';
 	?>
 	
 	<div class="container" role="main">
-		<?php 
- 		if(isset($test_envoi))
- 		{
- 			if($test_envoi == TRUE)
- 			{
- 				?>
- 				<h2 style="color:red; text-align:center;">Your message was correctly sent</h2>
- 				<?php
- 			}
- 			else 
- 			{
- 				?>
- 				<h2 style="color:red; text-align:center;">Error during the sending of the message</h2>
- 				<?php
- 			}
- 				
- 		}
- 		
- 		if(!isset($test_envoi))
- 		{
- 		?>
- 			<?php echo $_SESSION['name']; ?>
- 		
-	 		<form action="hiking.php" method="post" id="hiking" name="eventForm" novalidate>
-	 			<div class="form-group" ng-class="{ 'has-error': eventForm.organiserName.$invalid }" >
-			        <label class="control-label">Event organiser name * :</label>
-			        <input type="text" class="form-control" name="organiserName" ng-model="user.organiserName" required placeholder="Organiser name" value="<?php echo $_SESSION['name']; ?>" />
-			    </div>
-			    
-			    <div class="form-group" ng-class="{ 'has-error': eventForm.organiserPhone.$invalid }" >
-			        <label class="control-label">Event organiser phone number * :</label>
-			        <input type="text" class="form-control" name="organiserPhone" ng-model="user.organiserPhone" required placeholder="Organiser Phone" />
-			    </div>
-			    
-			    <div class="form-group" ng-class="{ 'has-error': eventForm.hikingName.$invalid }" >
-			        <label class="control-label">Hiking Name (eg. Mines de l'Eguisse) * :</label>
-			        <input type="text" class="form-control" name="hikingName" ng-model="user.hikingName" required placeholder="Hiking name" />
-			    </div>
-			    
-			    <div class="form-group" ng-class="{ 'has-error': eventForm.hikingDuration.$invalid }" >
-			        <label class="control-label">Hiking duration without stops (eg. 4 hours) * : </label>
-			        <input type="text" class="form-control" name="hikingDuration" ng-model="user.hikingDuration" required placeholder="Hiking duration" />
-			    </div>
-			    
-			    <div class="form-group" ng-class="{ 'has-error': eventForm.hikingElevation.$invalid }" >
-			        <label class="control-label">Hiking elevation (eg. +600m  / -600 m) * : </label>
-			        <input type="text" class="form-control" name="hikingElevation" ng-model="user.hikingElevation" required placeholder="Hiking elevation" />
-			    </div>
-			    
-			    <div class="form-group" ng-class="{ 'has-error': eventForm.hikingLevel.$invalid }" >
-			        <label class="control-label">Hiking level (eg. sportive) * : </label>
-			        <input type="text" class="form-control" name="hikingLevel" ng-model="user.hikingLevel" required placeholder="Hiking level" />
-			    </div>
-			    
-			    <div class="form-group" ng-class="{ 'has-error': eventForm.hikingDay.$invalid }">
-			    	<label class="control-label">Hiking day (eg. Friday 2nd May) * : 
-			        </label>
-		            <p class="input-group">
-		              <input type="date" class="form-control" datepicker-popup ng-model="user.hikingDay" is-open="status.opened" min-date="minDate" max-date="maxDate" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" close-text="Close" name="hikingDay" />
-		              <span class="input-group-btn">
-		                <button type="button" class="btn btn-default" ng-click="open($event)"><i class="glyphicon glyphicon-calendar"></i></button>
-		              </span>
-		            </p>
-		        </div>
-			    
-			    <div class="form-group" ng-class="{ 'has-error': eventForm.hikingDay.$invalid }" >
-			        <label class="control-label">Hiking link : 
-			        </label>
-			        <input type="text" class="form-control" name="hikingLink" ng-model="user.hikingLink" required placeholder="Hiking link" />
-			    </div>
-			    
-			    <div class="form-group" ng-class="{ 'has-error': eventForm.carSharingCost.$invalid }" >
-			        <label class="control-label">Blablacar estimated car sharing cost (per person) :</label>
-			        <input type="text" class="form-control" name="carSharingCost" ng-model="user.carSharingCost" required placeholder="Car sharing cost" />
-			    </div>
-			    
-			    <div class="form-group" style="height:1000px;" ng-class="{ 'has-error': eventForm.hikingMeetingTime.$invalid }" >
-			        <label class="control-label">Meeting point time (eg. 9H30) * :</label>
-			        <timepicker class="form-control" ng-model="user.hikingMeetingTime" ng-change="changed()" hour-step="hstep" minute-step="mstep" show-meridian="ismeridian" name="hikingMeetingTime" required></timepicker>
-			    </div>
-			    
-			    <div class="form-group" ng-class="{ 'has-error': eventForm.hikingMeetingLocation.$invalid }" >
-			        <label class="control-label">Meeting point location (eg. parking of Gourdon) * :</label>
-			        <input type="text" class="form-control" name="hikingMeetingLocation" ng-model="user.hikingMeetingLocation" required placeholder="Hiking meeting location" />
-			    </div>
-			    
-			    <div class="form-group" ng-class="{ 'has-error': eventForm.hikingMeetingGPS.$invalid }" >
-			        <label class="control-label">Meeting point GPS coordinates (eg. 43.891660, 7.265675) :</label>
-			        <input type="text" class="form-control" name="hikingMeetingGPS" ng-model="user.hikingMeetingGPS" required placeholder="Hiking meeting GPS" />
-			    </div>
-			    
-			    <div class="form-group" ng-class="{ 'has-error': eventForm.hikingMeetingGPS.$invalid }" >
-				  <label for="hikingOtherDetails" class="control-label">Hiking additional information :</label>
-				  <textarea class="form-control" rows="5" id="hikingOtherDetails" name="hikingOtherDetails" ng-model="user.hikingOtherDetails" required placeholder="Hiking other details" ></textarea>
-				</div>
-			     
-			    <div class="form-group" ng-class="{ 'has-error': eventForm.email.$invalid }" >
-			        <label class="control-label">Email</label>
-			        <input type="email" class="form-control" name="email" ng-model="user.email" required placeholder="Email" />
-			    </div>
-			    
-			    <button ng-click="save()" class="btn btn-primary" ng-disabled="eventForm.$invalid" class="btn btn-primary">Create event</button>
-			</form>
-			<?php 
- 		}
-		?>
+		<hiking-form>Loading...</hiking-form>
 	</div>
-   	<?php
-	include 'scripts.php';
-	?>
-	<script src="js/create-event.js"></script>
   </body>
 </html>

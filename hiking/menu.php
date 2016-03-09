@@ -17,7 +17,7 @@
 	      <?php
 	      if(!isAuthenticated()) {
 	      ?>
-	      <a href="https://secure.meetup.com/oauth2/authorize?client_id=<?php echo $_CONFIG['meetupKey']; ?>&amp;response_type=code&amp;redirect_uri=<?php echo $_CONFIG['meetupWebsite']; ?>" class="navbar-form navbar-right">
+	      <a href="https://secure.meetup.com/oauth2/authorize?client_id=<?php echo $GLOBALS['meetupKey']; ?>&amp;response_type=code&amp;redirect_uri=<?php echo $GLOBALS['meetupWebsite']; ?>" class="navbar-form navbar-right">
             <button type="button" class="btn btn-success">Login</button>
           </a>
           <?php
