@@ -27,9 +27,9 @@ System.register(['angular2/core', 'angular2/http', 'rxjs/Observable'], function(
             HikingService = (function () {
                 function HikingService(http) {
                     this.http = http;
-                    this._createEventUrl = 'http://hiking.cyril-grandjean.fr/add-event.php';
+                    this._createEventUrl = 'add-event.php';
                 }
-                HikingService.prototype.makeAnAppointment = function (hiking) {
+                HikingService.prototype.createEvent = function (hiking) {
                     var body = JSON.stringify({
                         organiserName: hiking.organiserName,
                         organiserPhone: hiking.organiserPhone,

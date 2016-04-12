@@ -7,9 +7,9 @@ import {Observable}     from 'rxjs/Observable';
 export class HikingService {
   constructor (private http: Http) {}
   
-  private _createEventUrl = 'http://hiking.cyril-grandjean.fr/add-event.php';
+  private _createEventUrl = 'add-event.php';
   
-  makeAnAppointment(hiking: Hiking) {
+  createEvent(hiking: Hiking) {
       let body = JSON.stringify({
                     organiserName: hiking.organiserName,
                     organiserPhone: hiking.organiserPhone,
