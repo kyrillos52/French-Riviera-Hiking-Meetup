@@ -2,24 +2,21 @@
     <form>
       <div class="form-group">
         <label for="organiserName">Organiser name *</label>
-        <input type="text" class="form-control" required
-            [(ngModel)]="model.organiserName" ngControl="organiserName"  #organiserName="ngForm" >
+        <input type="text" class="form-control" required [(ngModel)]="model.organiserName" ngControl="organiserName"  #organiserName="ngForm" />
         <div [hidden]="organiserName.valid || organiserName.pristine" class="alert alert-danger">
           Organiser name is required
         </div>
       </div>
       <div class="form-group">
         <label for="organiserPhone">French mobile phone number *</label>
-        <input type="tel" class="form-control" pattern="^0[6-7][0-9]{8}" required
-            [(ngModel)]="model.organiserPhone" ngControl="organiserPhone"  #organiserPhone="ngForm">
+        <input type="tel" class="form-control" pattern="^0[6-7][0-9]{8}" required [(ngModel)]="model.organiserPhone" ngControl="organiserPhone"  #organiserPhone="ngForm"/>
         <div [hidden]="organiserPhone.valid || organiserPhone.pristine" class="alert alert-danger">
           French mobile phone number is required
         </div>
       </div>
       <div class="form-group">
         <label for="name">Hiking name *</label>
-        <input type="text" class="form-control" required
-            [(ngModel)]="model.name" ngControl="name"  #name="ngForm">
+        <input type="text" class="form-control" required [(ngModel)]="model.name" ngControl="name"  #name="ngForm"/>
         <div [hidden]="name.valid || name.pristine" class="alert alert-danger">
           Hiking name is required
         </div>
@@ -35,20 +32,29 @@
       </div>
       <div class="form-group">
         <label for="duration">Hiking duration in hours (eg. 4)*</label>
-        <input type="number"  step = "1" class="form-control" required
-            [(ngModel)]="model.duration" ngControl="duration"  #duration="ngForm">
+        <input type="number"  step = "1" class="form-control" required [(ngModel)]="model.duration" ngControl="duration"  #duration="ngForm"/>
         <div [hidden]="duration.valid || duration.pristine" class="alert alert-danger">
           Hiking duration is required
         </div>
       </div>
+      
       <div class="form-group">
         <label for="string">Hiking elevation in meters(eg. 600) *</label>
-        <input type="number"  step="50" class="form-control" required
-            [(ngModel)]="model.elevation" ngControl="elevation"  #elevation="ngForm">
+        <input type="number"  step="50" class="form-control" required [(ngModel)]="model.elevation" ngControl="elevation"  #elevation="ngForm" />
         <div [hidden]="elevation.valid || elevation.pristine" class="alert alert-danger">
           Hiking elevation is required
         </div>
       </div>
+      
+      <div class="form-group">
+        <label for="number">Maximum number of participants (eg. 20)*</label>
+        <input type="number"  step = "1" class="form-control" required
+            [(ngModel)]="model.numberOfPeople" ngControl="number"  #numberOfPeople="ngForm" value="20"/>
+        <div [hidden]="numberOfPeople.valid || numberOfPeople.pristine" class="alert alert-danger">
+          Maximum number of participants is required
+        </div>
+      </div>
+      
       <div class="form-group">
             <label for="string">Meeting point time (eg. 01/01/2016 10:00) *</label>
             <div class="input-group date datetimepicker">
@@ -58,6 +64,7 @@
                 </span>
             </div>
       </div>
+      
       <div class="form-group">
         <label for="string">Meeting point location (eg. point in the map) *</label>
         <fieldset class="gllpLatlonPicker">
@@ -72,8 +79,7 @@
       
       <div class="form-group">
         <label for="string">Additional informations</label>
-        <textarea rows="4" cols="50" class="form-control"
-            [(ngModel)]="model.additionalInfo" ngControl="additionalInfo"  #additionalInfo="ngForm" ></textarea>
+        <textarea rows="4" cols="50" class="form-control" [(ngModel)]="model.additionalInfo" ngControl="additionalInfo"  #additionalInfo="ngForm"></textarea>
       </div>
       
       <p>* Required fields</p>

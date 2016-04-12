@@ -12,6 +12,7 @@ export class Hiking {
 	public limit: number,
     public latitude: string,
     public longitude: string,
+    public numberOfPeople: number,
     public additionalInfo?: string
   ) {  }
 }

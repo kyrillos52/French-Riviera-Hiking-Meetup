@@ -28,7 +28,7 @@ System.register(['angular2/core', './model/hiking'], function(exports_1, context
                 function HikingFormComponent(elementRef) {
                     this.levels = ['Easy', 'Medium',
                         'Sportive', 'Alpine'];
-                    this.model = new hiking_1.Hiking('', '', '', 0, '', '', '', '', '', 20, '20', '20', '');
+                    this.model = new hiking_1.Hiking('', '', '', 0, '', '', '', '', '', 20, '20', '20', 20, '');
                     this.submitted = false;
                     this.elementRef = elementRef;
                 }
