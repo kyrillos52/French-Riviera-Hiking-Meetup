@@ -40,7 +40,6 @@ System.register(['angular2/core', 'angular2/http', 'rxjs/Observable'], function(
                         date: hiking.date,
                         location: hiking.location,
                         link: hiking.link,
-                        limit: hiking.limit,
                         latitude: hiking.latitude,
                         longitude: hiking.longitude,
                         numberOfPeople: hiking.numberOfPeople,

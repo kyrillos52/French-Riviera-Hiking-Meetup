@@ -1,21 +1,21 @@
 <div class="container">
-    <form>
+    <form #hikingForm="ngForm">
       <div class="form-group">
-        <label for="organiserName">Organiser name *</label>
+        <label for="organiserName">Event organiser name *</label>
         <input type="text" class="form-control" required [(ngModel)]="model.organiserName" ngControl="organiserName"  #organiserName="ngForm" />
         <div [hidden]="organiserName.valid || organiserName.pristine" class="alert alert-danger">
           Organiser name is required
         </div>
       </div>
       <div class="form-group">
-        <label for="organiserPhone">French mobile phone number *</label>
+        <label for="organiserPhone">Event organiser French mobile phone number *</label>
         <input type="tel" class="form-control" pattern="^0[6-7][0-9]{8}" required [(ngModel)]="model.organiserPhone" ngControl="organiserPhone"  #organiserPhone="ngForm"/>
         <div [hidden]="organiserPhone.valid || organiserPhone.pristine" class="alert alert-danger">
           French mobile phone number is required
         </div>
       </div>
       <div class="form-group">
-        <label for="name">Hiking name *</label>
+        <label for="name">Hiking name (eg. Puy de Naouri) *</label>
         <input type="text" class="form-control" required [(ngModel)]="model.name" ngControl="name"  #name="ngForm"/>
         <div [hidden]="name.valid || name.pristine" class="alert alert-danger">
           Hiking name is required
@@ -39,7 +39,7 @@
       </div>
       
       <div class="form-group">
-        <label for="string">Hiking elevation in meters(eg. 600) *</label>
+        <label for="string">Hiking positive elevation in meters (eg. 600) *</label>
         <input type="number"  step="50" class="form-control" required [(ngModel)]="model.elevation" ngControl="elevation"  #elevation="ngForm" />
         <div [hidden]="elevation.valid || elevation.pristine" class="alert alert-danger">
           Hiking elevation is required
@@ -66,7 +66,7 @@
       </div>
       
       <div class="form-group">
-        <label for="string">Meeting point location (eg. point in the map) *</label>
+        <label for="string">Meeting point location (eg. Gare de Frejus, Frejus) + Point in the map *</label>
         <fieldset class="gllpLatlonPicker">
             <input type="text" class="gllpSearchField">
             <input type="button" class="gllpSearchButton" value="Search an address"><br/><br/>
@@ -78,11 +78,19 @@
       </div>
       
       <div class="form-group">
-        <label for="string">Additional informations</label>
+        <label for="link">Hiking link (eg. http://www.randoxygene.org/pge/rando_pe/affiche_rando.php?rubrique=1&zone=3&rando=28&current=pc-8&ct=pc)</label>
+        <input type="text" class="form-control" [(ngModel)]="model.link" ngControl="link"  #link="ngForm"/>
+        <div [hidden]="link.valid || link.pristine" class="alert alert-danger">
+          Hiking name is required
+        </div>
+      </div>
+      
+      <div class="form-group">
+        <label for="string">Additional informations (eg. Don't forget to take your flash light)</label>
         <textarea rows="4" cols="50" class="form-control" [(ngModel)]="model.additionalInfo" ngControl="additionalInfo"  #additionalInfo="ngForm"></textarea>
       </div>
       
       <p>* Required fields</p>
-      <button class="btn btn-default" (click)="onSubmit()">Submit</button>
+      <button class="btn btn-default" [disabled]="!hikingForm.form.valid" (click)="onSubmit()">Submit</button>
     </form>
 </div>

@@ -9,7 +9,6 @@ export class Hiking {
 	public date: string,
 	public location: string,
 	public link: string,
-	public limit: number,
     public latitude: string,
     public longitude: string,
     public numberOfPeople: number,

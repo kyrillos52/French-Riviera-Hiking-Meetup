@@ -20,7 +20,6 @@ export class HikingService {
                     date: hiking.date,
                     location: hiking.location,
                     link: hiking.link,
-                    limit: hiking.limit,
                     latitude: hiking.latitude,
                     longitude: hiking.longitude,
                     numberOfPeople: hiking.numberOfPeople,
