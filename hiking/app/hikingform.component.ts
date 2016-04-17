@@ -17,7 +17,7 @@ declare var jQuery:any;
 export class HikingFormComponent implements OnInit {
   levels = ['Easy', 'Medium',
             'Sportive', 'Alpine'];
-  model = new Hiking('','','',0,'','','','','',20,'20','20',20,'');
+  model = new Hiking('','','',0,'','','','','','20','20',20,'');
   hikingConfirmationStatus : string = 'notSubmitted';
   elementRef: ElementRef;
   constructor(@Inject(ElementRef) elementRef: ElementRef, private _hikingService: HikingService) {

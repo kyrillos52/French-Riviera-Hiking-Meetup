@@ -8,7 +8,7 @@
         </div>
       </div>
       <div class="form-group">
-        <label for="organiserPhone">Event organiser French mobile phone number *</label>
+        <label for="organiserPhone">Event organiser French mobile phone number (eg. 0600000000) *</label>
         <input type="tel" class="form-control" pattern="^0[6-7][0-9]{8}" required [(ngModel)]="model.organiserPhone" ngControl="organiserPhone"  #organiserPhone="ngForm"/>
         <div [hidden]="organiserPhone.valid || organiserPhone.pristine" class="alert alert-danger">
           French mobile phone number is required
@@ -68,21 +68,21 @@
       <div class="form-group">
         <label for="string">Meeting point location (eg. Gare de Frejus, Frejus) + Point in the map *</label>
         <fieldset class="gllpLatlonPicker">
-            <input type="text" class="gllpSearchField">
+            <input type="text" class="gllpSearchField" required [(ngModel)]="model.location" ngControl="location"  #location="ngForm">
             <input type="button" class="gllpSearchButton" value="Search an address"><br/><br/>
             <div class="gllpMap">Google Maps</div>
             <input type="hidden" id="latitude" class="gllpLatitude" value="43.706644"/>
             <input type="hidden" id="longitude" class="gllpLongitude" value="7.262085"/>
             <input type="hidden" class="gllpZoom" value="10"/>
         </fieldset>
+        <div [hidden]="location.valid || location.pristine" class="alert alert-danger">
+          Meeting point location is required
+        </div>
       </div>
       
       <div class="form-group">
         <label for="link">Hiking link (eg. http://www.randoxygene.org/pge/rando_pe/affiche_rando.php?rubrique=1&zone=3&rando=28&current=pc-8&ct=pc)</label>
         <input type="text" class="form-control" [(ngModel)]="model.link" ngControl="link"  #link="ngForm"/>
-        <div [hidden]="link.valid || link.pristine" class="alert alert-danger">
-          Hiking name is required
-        </div>
       </div>
       
       <div class="form-group">

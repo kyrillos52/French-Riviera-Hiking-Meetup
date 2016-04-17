@@ -35,7 +35,7 @@ System.register(['angular2/core', './model/hiking', './hiking.service', 'angular
                     this._hikingService = _hikingService;
                     this.levels = ['Easy', 'Medium',
                         'Sportive', 'Alpine'];
-                    this.model = new hiking_1.Hiking('', '', '', 0, '', '', '', '', '', 20, '20', '20', 20, '');
+                    this.model = new hiking_1.Hiking('', '', '', 0, '', '', '', '', '', '20', '20', 20, '');
                     this.hikingConfirmationStatus = 'notSubmitted';
                     this.submitted = false;
                     this.elementRef = elementRef;
