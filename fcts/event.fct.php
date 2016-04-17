@@ -18,5 +18,7 @@ function addEvent($db, $event_organiser, $how_to_find_us, $name, $description, $
 	$stmt->bindParam(':rsvp_limit', $rsvp_limit);
 	$stmt->bindParam(':time', $time);
 	$stmt->execute();
+	
+	return $db->lastInsertId();
 }
 ?>
