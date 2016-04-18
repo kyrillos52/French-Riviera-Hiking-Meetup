@@ -8,16 +8,7 @@ include 'session.php';
 $title = "French Riviera Hiking Meetup - Create an hiking event";
 $activeMenu = "create-event";
 
-$_POST_PROTECT = $_POST;
-
-//Si tous les champs sont remplis
-if (isset($_POST_PROTECT['nom']) && isset($_POST_PROTECT['email']) && isset($_POST_PROTECT['meetupUserName'])AND isset($_SESSION['hikingContent']))
-{
-	if ($_POST_PROTECT['nom'] != NULL AND $_POST_PROTECT['email'] != NULL  AND $_POST_PROTECT['meetupUserName'] != NULL AND $_SESSION['hikingContent'] != NULL)
-	{
-		$test_envoi = envoyermail(utf8_decode($_POST_PROTECT['nom']), $_POST_PROTECT['email'], 'facebook@cyril-grandjean.fr', nl2br(utf8_decode("Hiking request ".$_POST_PROTECT['meetupUserName'])), $_SESSION['hikingContent']);
-	}
-}
+if(isAuthenticated()) {
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -50,11 +41,11 @@ if (isset($_POST_PROTECT['nom']) && isset($_POST_PROTECT['email']) && isset($_PO
 	    <script src="https://cdnjs.cloudflare.com/ajax/libs/es6-shim/0.33.3/es6-shim.min.js"></script>
 	    <script src="https://cdnjs.cloudflare.com/ajax/libs/systemjs/0.19.16/system-polyfills.js"></script>
 	
-	    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/2.0.0-beta.6/angular2-polyfills.min.js"></script>
+	    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/2.0.0-beta.15/angular2-polyfills.min.js"></script>
 	    <script src="https://cdnjs.cloudflare.com/ajax/libs/systemjs/0.19.22/system.js"></script>
-	    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/2.0.0-beta.6/Rx.min.js"></script>
-	    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/2.0.0-beta.6/http.min.js"></script>
-	    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/2.0.0-beta.6/angular2.js"></script>
+	    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/2.0.0-beta.15/Rx.min.js"></script>
+	    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/2.0.0-beta.15/http.min.js"></script>
+	    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/2.0.0-beta.15/angular2.js"></script>
 	
 	    <!-- 2. Configure SystemJS -->
 	    <script>
@@ -80,3 +71,6 @@ if (isset($_POST_PROTECT['nom']) && isset($_POST_PROTECT['email']) && isset($_PO
 	</div>
   </body>
 </html>
+<?php
+}
+?>

@@ -9,7 +9,7 @@ $result['data'] = 'unknown';
 $postdata = file_get_contents("php://input");
 $request = json_decode($postdata);
 
-if(isset($request->organiserName) && isset($request->organiserPhone) && isset($request->name) && isset($request->duration) && isset($request->elevation) && isset($request->level) && isset($request->date) && isset($request->location) && isset($request->latitude) && isset($request->longitude) && isset($request->numberOfPeople)) {
+if(isset($request->organiserName) && isset($request->organiserPhone) && isset($request->name) && isset($request->duration) && isset($request->elevation) && isset($request->level) && isset($request->date) && isset($request->location) && isset($request->latitude) && isset($request->longitude) && isset($request->numberOfPeople) && isAuthenticated()) {
 	
 	try {
 		
