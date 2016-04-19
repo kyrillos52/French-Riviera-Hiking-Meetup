@@ -1,3 +1,5 @@
+import {Venue} from './venue';
+
 export class Hiking {
   constructor(
     public organiserName: string,
@@ -12,6 +14,8 @@ export class Hiking {
     public latitude: string,
     public longitude: string,
     public numberOfPeople: number,
+    public venue: Venue,
     public additionalInfo?: string
+    
   ) {  }
 }

@@ -28,7 +28,14 @@ System.register(['angular2/core', 'angular2/http', 'rxjs/Observable'], function(
                 function HikingService(http) {
                     this.http = http;
                     this._createEventUrl = 'add-event.php';
+                    this._venueList = 'get-venues.php';
                 }
+                HikingService.prototype.getVenues = function () {
+                    return this.http.get(this._venueList)
+                        .map(function (res) { return res.json().data; })
+                        .do(function (data) { return console.log(data); }) // eyeball results in the console
+                        .catch(this.handleErrorList);
+                };
                 HikingService.prototype.createEvent = function (hiking) {
                     var body = JSON.stringify({
                         organiserName: hiking.organiserName,
@@ -38,12 +45,15 @@ System.register(['angular2/core', 'angular2/http', 'rxjs/Observable'], function(
                         elevation: hiking.elevation,
                         level: hiking.level,
                         date: hiking.date,
-                        location: hiking.location,
                         link: hiking.link,
                         latitude: hiking.latitude,
                         longitude: hiking.longitude,
                         numberOfPeople: hiking.numberOfPeople,
-                        additionalInfo: hiking.additionalInfo
+                        additionalInfo: hiking.additionalInfo,
+                        venueId: hiking.venue.id,
+                        venueName: hiking.venue.name,
+                        venueAddress: hiking.venue.address,
+                        venueCity: hiking.venue.city
                     });
                     var headers = new http_1.Headers({ 'Content-Type': 'application/json' });
                     var options = new http_1.RequestOptions({ headers: headers });

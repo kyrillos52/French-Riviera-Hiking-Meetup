@@ -1,6 +1,7 @@
 import {Component, ElementRef, OnInit, Inject} from 'angular2/core';
 import {NgForm}    from 'angular2/common';
 import { Hiking }    from './model/hiking';
+import { Venue }    from './model/venue';
 import {HikingService} from './hiking.service';
 import {HTTP_PROVIDERS}    from 'angular2/http';
 
@@ -17,7 +18,11 @@ declare var jQuery:any;
 export class HikingFormComponent implements OnInit {
   levels = ['Easy', 'Medium',
             'Sportive', 'Alpine'];
-  model = new Hiking('','','',0,'','','','','','20','20',20,'');
+  displayListVenuesError = false;
+  newVenue = false;
+  model = new Hiking('','','',0,'','','','','','20','20',20, new Venue(), '');
+  searchedQuery = 'Nice';
+  venues: Venue[] = [];
   hikingConfirmationStatus : string = 'notSubmitted';
   elementRef: ElementRef;
   constructor(@Inject(ElementRef) elementRef: ElementRef, private _hikingService: HikingService) {
@@ -36,8 +41,53 @@ export class HikingFormComponent implements OnInit {
             });
     });
     
+    this.getVenues();
   }
   submitted = false;
+  displaySearchMapBtn = false;
+  
+  getVenues() {
+        var errorMessage = '';
+        this.displayListVenuesError = false;
+        this._hikingService.getVenues()
+                     .subscribe(
+                       data => this.venues = data,
+                       error =>  this.displayVenuesError());
+   }
+   
+   selectVenue(selectedVenue: Venue) {
+       this.model.venue = selectedVenue;
+       
+       if(selectedVenue.id == 0) {
+           this.newVenue = true;
+           this.displaySearchMapBtn = true;
+       } else {
+           this.newVenue = false;
+           this.displaySearchMapBtn = false;
+       }
+       
+       var testElementsMap = document.getElementsByClassName('gllpLatlonPicker');
+       Array.prototype.filter.call(testElementsMap, function(testElement){
+           var map = jQuery().gMapsLatLonPicker();
+           map.init(testElement );
+           map.changePosition(selectedVenue.lat, selectedVenue.lon);
+       });
+   }
+   
+   searchMap() {
+       var queryString = this.model.venue.address+' '+this.model.venue.city
+       var testElementsMap = document.getElementsByClassName('gllpLatlonPicker');
+       Array.prototype.filter.call(testElementsMap, function(testElement){
+           var map = jQuery().gMapsLatLonPicker();
+           map.init(testElement );
+           map.changeQuery(queryString);
+       });
+   }
+   
+   displayVenuesError() {
+        this.displayListVenuesError = true;
+   }
+  
   onSubmit() { 
       this.submitted = false;
       this.model.longitude = (<HTMLInputElement>document.getElementById("longitude")).value; 

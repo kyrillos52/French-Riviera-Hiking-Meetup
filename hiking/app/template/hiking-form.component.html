@@ -58,7 +58,7 @@
       <div class="form-group">
             <label for="string">Meeting point time (eg. 01/01/2016 10:00) *</label>
             <div class="input-group date datetimepicker">
-                <input type="text" class="form-control" [(ngModel)]="model.date" ngControl="date"  #date="ngForm" id="date" />
+                <input type="text" class="gllpSearchButton" class="form-control" [(ngModel)]="model.date" ngControl="date"  #date="ngForm" id="date" />
                 <span class="input-group-addon">
                     <span class="glyphicon glyphicon-calendar"></span>
                 </span>
@@ -66,18 +66,45 @@
       </div>
       
       <div class="form-group">
-        <label for="string">Meeting point location (eg. Gare de Frejus, Frejus) + Point in the map *</label>
+        <label for="level">Meeting point location *</label>
+        <p *ngFor="#venue of venues">
+              <input type="radio" name="optradio" (click)="selectVenue(venue)" required /> {{venue.displayName}}
+        </p>
+      </div>
+      
+      <div class="form-group" *ngIf="newVenue">
+        <label for="name">Meeting point name *</label>
+        <input type="text" class="form-control" required [(ngModel)]="model.venue.name" ngControl="venueName"  #venueName="ngForm"/>
+        <div [hidden]="venueName.valid || venueName.pristine" class="alert alert-danger">
+          Meeting point name is required
+        </div>
+      </div>
+      
+      <div class="form-group" *ngIf="newVenue">
+        <label for="name">Meeting point address *</label>
+        <input type="text" class="form-control" required [(ngModel)]="model.venue.address" ngControl="address"  #address="ngForm"/>
+        <div [hidden]="address.valid || address.pristine" class="alert alert-danger">
+          Meeting point address is required
+        </div>
+      </div>
+      
+      <div class="form-group" *ngIf="newVenue">
+        <label for="name">Meeting point city *</label>
+        <input type="text" class="form-control" required [(ngModel)]="model.venue.city" ngControl="city"  #city="ngForm"/>
+        <div [hidden]="city.valid || city.pristine" class="alert alert-danger">
+          Meeting point city is required
+        </div>
+        
+        <br /> <input type="button" class="btn btn-default" (click)="searchMap()" value="Check in the map"/>
+      </div>
+      
+      <div class="form-group">
         <fieldset class="gllpLatlonPicker">
-            <input type="text" class="gllpSearchField" required [(ngModel)]="model.location" ngControl="location"  #location="ngForm">
-            <input type="button" class="gllpSearchButton" value="Search an address"><br/><br/>
             <div class="gllpMap">Google Maps</div>
-            <input type="hidden" id="latitude" class="gllpLatitude" value="43.706644"/>
-            <input type="hidden" id="longitude" class="gllpLongitude" value="7.262085"/>
+            <input type="hidden" id="latitude" class="gllpLatitude" value="{{model.venue.lat}}"/>
+            <input type="hidden" id="longitude" class="gllpLongitude" value="{{model.venue.lon}}"/>
             <input type="hidden" class="gllpZoom" value="10"/>
         </fieldset>
-        <div [hidden]="location.valid || location.pristine" class="alert alert-danger">
-          Meeting point location is required
-        </div>
       </div>
       
       <div class="form-group">

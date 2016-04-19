@@ -1,6 +1,7 @@
 import {Injectable}     from 'angular2/core';
 import {Http, Response, Headers, RequestOptions} from 'angular2/http';
 import {Hiking} from './model/hiking';
+import {Venue} from './model/venue';
 import {Observable}     from 'rxjs/Observable';
 
 @Injectable()
@@ -8,6 +9,14 @@ export class HikingService {
   constructor (private http: Http) {}
   
   private _createEventUrl = 'add-event.php';
+  private _venueList = 'get-venues.php';
+
+  getVenues () {
+    return this.http.get(this._venueList)
+                    .map(res => <Venue[]> res.json().data)
+                    .do(data => console.log(data)) // eyeball results in the console
+                    .catch(this.handleErrorList);
+  }
   
   createEvent(hiking: Hiking) {
       let body = JSON.stringify({
@@ -18,12 +27,15 @@ export class HikingService {
                     elevation: hiking.elevation,
                     level: hiking.level,
                     date: hiking.date,
-                    location: hiking.location,
                     link: hiking.link,
                     latitude: hiking.latitude,
                     longitude: hiking.longitude,
                     numberOfPeople: hiking.numberOfPeople,
-                    additionalInfo: hiking.additionalInfo
+                    additionalInfo: hiking.additionalInfo,
+                    venueId: hiking.venue.id,
+                    venueName: hiking.venue.name,
+                    venueAddress: hiking.venue.address,
+                    venueCity: hiking.venue.city
                  });
       let headers = new Headers({ 'Content-Type': 'application/json' });
       let options = new RequestOptions({ headers: headers });

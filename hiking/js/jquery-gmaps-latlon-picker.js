@@ -223,6 +223,15 @@ $.fn.gMapsLatLonPicker = (function() {
 				_self.vars.map.setZoom( parseInt( $(_self.vars.cssID + ".gllpZoom").val() ) );
 				setPosition(latlng);
 			});
+		},
+		
+		changePosition(lat, lng) {
+			var latlng = new google.maps.LatLng(lat, lng);
+			setPosition(latlng);
+		},
+		
+		changeQuery(query) {
+			performSearch(query, false);
 		}
 
 	}

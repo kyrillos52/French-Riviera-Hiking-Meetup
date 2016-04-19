@@ -1,4 +1,4 @@
-System.register(['angular2/core', './model/hiking', './hiking.service', 'angular2/http'], function(exports_1, context_1) {
+System.register(['angular2/core', './model/hiking', './model/venue', './hiking.service', 'angular2/http'], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -13,7 +13,7 @@ System.register(['angular2/core', './model/hiking', './hiking.service', 'angular
     var __param = (this && this.__param) || function (paramIndex, decorator) {
         return function (target, key) { decorator(target, key, paramIndex); }
     };
-    var core_1, hiking_1, hiking_service_1, http_1;
+    var core_1, hiking_1, venue_1, hiking_service_1, http_1;
     var HikingFormComponent;
     return {
         setters:[
@@ -22,6 +22,9 @@ System.register(['angular2/core', './model/hiking', './hiking.service', 'angular
             },
             function (hiking_1_1) {
                 hiking_1 = hiking_1_1;
+            },
+            function (venue_1_1) {
+                venue_1 = venue_1_1;
             },
             function (hiking_service_1_1) {
                 hiking_service_1 = hiking_service_1_1;
@@ -35,9 +38,14 @@ System.register(['angular2/core', './model/hiking', './hiking.service', 'angular
                     this._hikingService = _hikingService;
                     this.levels = ['Easy', 'Medium',
                         'Sportive', 'Alpine'];
-                    this.model = new hiking_1.Hiking('', '', '', 0, '', '', '', '', '', '20', '20', 20, '');
+                    this.displayListVenuesError = false;
+                    this.newVenue = false;
+                    this.model = new hiking_1.Hiking('', '', '', 0, '', '', '', '', '', '20', '20', 20, new venue_1.Venue(), '');
+                    this.searchedQuery = 'Nice';
+                    this.venues = [];
                     this.hikingConfirmationStatus = 'notSubmitted';
                     this.submitted = false;
+                    this.displaySearchMapBtn = false;
                     this.elementRef = elementRef;
                 }
                 HikingFormComponent.prototype.ngOnInit = function () {
@@ -51,6 +59,43 @@ System.register(['angular2/core', './model/hiking', './hiking.service', 'angular
                             format: 'DD/MM/YYYY HH:mm'
                         });
                     });
+                    this.getVenues();
+                };
+                HikingFormComponent.prototype.getVenues = function () {
+                    var _this = this;
+                    var errorMessage = '';
+                    this.displayListVenuesError = false;
+                    this._hikingService.getVenues()
+                        .subscribe(function (data) { return _this.venues = data; }, function (error) { return _this.displayVenuesError(); });
+                };
+                HikingFormComponent.prototype.selectVenue = function (selectedVenue) {
+                    this.model.venue = selectedVenue;
+                    if (selectedVenue.id == 0) {
+                        this.newVenue = true;
+                        this.displaySearchMapBtn = true;
+                    }
+                    else {
+                        this.newVenue = false;
+                        this.displaySearchMapBtn = false;
+                    }
+                    var testElementsMap = document.getElementsByClassName('gllpLatlonPicker');
+                    Array.prototype.filter.call(testElementsMap, function (testElement) {
+                        var map = jQuery().gMapsLatLonPicker();
+                        map.init(testElement);
+                        map.changePosition(selectedVenue.lat, selectedVenue.lon);
+                    });
+                };
+                HikingFormComponent.prototype.searchMap = function () {
+                    var queryString = this.model.venue.address + ' ' + this.model.venue.city;
+                    var testElementsMap = document.getElementsByClassName('gllpLatlonPicker');
+                    Array.prototype.filter.call(testElementsMap, function (testElement) {
+                        var map = jQuery().gMapsLatLonPicker();
+                        map.init(testElement);
+                        map.changeQuery(queryString);
+                    });
+                };
+                HikingFormComponent.prototype.displayVenuesError = function () {
+                    this.displayListVenuesError = true;
                 };
                 HikingFormComponent.prototype.onSubmit = function () {
                     var _this = this;

@@ -6,7 +6,7 @@ System.register([], function(exports_1, context_1) {
         setters:[],
         execute: function() {
             Hiking = (function () {
-                function Hiking(organiserName, organiserPhone, name, duration, elevation, level, date, location, link, latitude, longitude, numberOfPeople, additionalInfo) {
+                function Hiking(organiserName, organiserPhone, name, duration, elevation, level, date, location, link, latitude, longitude, numberOfPeople, venue, additionalInfo) {
                     this.organiserName = organiserName;
                     this.organiserPhone = organiserPhone;
                     this.name = name;
@@ -19,6 +19,7 @@ System.register([], function(exports_1, context_1) {
                     this.latitude = latitude;
                     this.longitude = longitude;
                     this.numberOfPeople = numberOfPeople;
+                    this.venue = venue;
                     this.additionalInfo = additionalInfo;
                 }
                 return Hiking;
