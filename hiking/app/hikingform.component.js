@@ -104,8 +104,11 @@ System.register(['angular2/core', './model/hiking', './model/venue', './hiking.s
                     this.model.latitude = document.getElementById("latitude").value;
                     this.model.date = document.getElementById("date").value;
                     this._hikingService.createEvent(this.model)
-                        .subscribe(function (data) { return _this.hikingConfirmationStatus = data; });
+                        .subscribe(function (data) { return _this.hikingConfirmationStatus = data; }, function (error) { return _this.displayConfirmationError(); });
                     return false;
+                };
+                HikingFormComponent.prototype.displayConfirmationError = function () {
+                    this.hikingConfirmationStatus = 'error;';
                 };
                 Object.defineProperty(HikingFormComponent.prototype, "diagnostic", {
                     // TODO: Remove this when we're done

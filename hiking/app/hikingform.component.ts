@@ -96,10 +96,15 @@ export class HikingFormComponent implements OnInit {
       
       this._hikingService.createEvent(this.model)
                     .subscribe(
-                    data =>  this.hikingConfirmationStatus = data);
+                    data =>  this.hikingConfirmationStatus = data,
+                    error =>  this.displayConfirmationError());
                     
       return false; 
   }
+  
+  displayConfirmationError() {
+        this.hikingConfirmationStatus = 'error;'
+   }
   // TODO: Remove this when we're done
   get diagnostic() { return JSON.stringify(this.model); }
 }

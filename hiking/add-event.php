@@ -9,15 +9,15 @@ $result['data'] = 'unknown';
 $postdata = file_get_contents("php://input");
 $request = json_decode($postdata);
 
-if(isset($request->organiserName) && isset($request->organiserPhone) && isset($request->name) && isset($request->duration) && isset($request->elevation) && isset($request->level) && isset($request->date) && isset($request->location) && isset($request->latitude) && isset($request->longitude) && isset($request->numberOfPeople) && isAuthenticated()) {
+if(isset($request->organiserName) && isset($request->organiserPhone) && isset($request->name) && isset($request->duration) && isset($request->elevation) && isset($request->level) && isset($request->date) && isset($request->venueId) && isset($request->venueName) && isset($request->venueAddress) && isset($request->venueCity) && isset($request->latitude) && isset($request->longitude) && isset($request->numberOfPeople) && isAuthenticated()) {
 	
 	try {
 		
-		$description = templateMailContent($request->name, $request->level, $request->duration, $request->elevation, $request->location, $request->date, "$request->latitude,$request->longitude", $request->additionalInfo, $request->link, '', $request->organiserName, $request->organiserPhone);
+		$description = templateMailContent($request->name, $request->level, $request->duration, $request->elevation, $request->venueName, $request->date, "$request->latitude,$request->longitude", $request->additionalInfo, $request->link, '', $request->organiserName, $request->organiserPhone);
 		
 		$date = DateTime::createFromFormat('d/m/Y H:i', $request->date);
 		
-	    $lastId = addEvent($bdd, $_SESSION['id'], $request->location, $request->name, $description, $request->numberOfPeople, date_format($date, 'Y-m-d H:i:s'));
+	    $lastId = addEvent($bdd, $_SESSION['id'], $request->venueName, $request->name, $description, $request->numberOfPeople, date_format($date, 'Y-m-d H:i:s'), $request->venueId, $request->venueName, $request->venueAddress, $request->venueCity, 'FR', $request->latitude, $request->longitude);
 	    
 	    $hikingMail = "<p>Click <a href=\"http://hiking.cyril-grandjean.fr/validate-event.php?id=$lastId\">here</a> to validate this hiking request ? :</p>$description";
 	    

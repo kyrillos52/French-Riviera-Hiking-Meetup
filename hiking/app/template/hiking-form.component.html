@@ -119,5 +119,12 @@
       
       <p>* Required fields</p>
       <button class="btn btn-default" [disabled]="!hikingForm.form.valid" (click)="onSubmit()">Submit</button>
+      
+      <div class="container" *ngIf="hikingConfirmationStatus == 'success'">
+          <div class="alert alert-success" role="alert">Your hiking request <strong>{{model.name}} on {{model.date}}</strong> has been taken into account</div>
+      </div>
+      <div class="container" *ngIf="hikingConfirmationStatus == 'error'">
+          <div class="alert alert-danger" role="alert"><strong>Error: </strong>Your request has not been submitted. Please ask advice to the group organiser</div>
+      </div>
     </form>
 </div>
