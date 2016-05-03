@@ -41,11 +41,8 @@ if(isAuthenticated() && $_SESSION['id'] == $GLOBALS['organiserId'] && isset($_GE
 	    "rsvp_limit" => $event['rsvp_limit'],
 	    "how_to_find_us" => $event['how_to_find_us'],
 	    "time" => strtotime($event['time'])*1000,
-	    "publish_status"  => "draft",
 	    "venue_id" => $venueId
 	); 
-	
-	print_r($eventData);
 	
 	$data = $rest->setUrl('https://api.meetup.com/2/event')->post($eventData, $accessData);
 	
