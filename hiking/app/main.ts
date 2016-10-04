@@ -1,6 +1,9 @@
-import {bootstrap}    from 'angular2/platform/browser'
-import {HikingFormComponent} from './hikingform.component'
+import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
+import { HikingFormModule } from './hikingform.module';
+import {enableProdMode} from '@angular/core';
 import 'rxjs/Rx';
 import 'rxjs/add/operator/map';
 
-bootstrap(HikingFormComponent)
+enableProdMode();
+const platform = platformBrowserDynamic();
+platform.bootstrapModule(HikingFormModule);

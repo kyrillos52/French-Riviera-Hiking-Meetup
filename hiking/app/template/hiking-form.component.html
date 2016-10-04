@@ -1,30 +1,30 @@
 <div class="container">
-    <form #hikingForm="ngForm">
+    <form #hikingForm="ngForm" novalidate>
       <div class="form-group">
         <label for="organiserName">Event organiser name *</label>
-        <input type="text" class="form-control" required [(ngModel)]="model.organiserName" ngControl="organiserName"  #organiserName="ngForm" />
+        <input type="text" class="form-control" required [(ngModel)]="model.organiserName" name="organiserName"  #organiserName="ngModel" />
         <div [hidden]="organiserName.valid || organiserName.pristine" class="alert alert-danger">
           Organiser name is required
         </div>
       </div>
       <div class="form-group">
         <label for="organiserPhone">Event organiser French mobile phone number (eg. 0600000000) *</label>
-        <input type="tel" class="form-control" pattern="^0[6-7][0-9]{8}" required [(ngModel)]="model.organiserPhone" ngControl="organiserPhone"  #organiserPhone="ngForm"/>
+        <input type="tel" class="form-control" pattern="^0[6-7][0-9]{8}" required [(ngModel)]="model.organiserPhone" name="organiserPhone"  #organiserPhone="ngModel"/>
         <div [hidden]="organiserPhone.valid || organiserPhone.pristine" class="alert alert-danger">
           French mobile phone number is required
         </div>
       </div>
       <div class="form-group">
         <label for="name">Hiking name (eg. Puy de Naouri) *</label>
-        <input type="text" class="form-control" required [(ngModel)]="model.name" ngControl="name"  #name="ngForm"/>
+        <input type="text" class="form-control" required [(ngModel)]="model.name" name="name"  #name="ngModel"/>
         <div [hidden]="name.valid || name.pristine" class="alert alert-danger">
           Hiking name is required
         </div>
       </div>
       <div class="form-group">
         <label for="level">Hiking level *</label>
-        <select class="form-control" required [(ngModel)]="model.level" ngControl="level"  #level="ngForm">
-            <option *ngFor="#level of levels" [value]="level">{{level}}</option>
+        <select class="form-control" required [(ngModel)]="model.level" name="level"  #level="ngModel">
+            <option *ngFor="let level of levels" [value]="level">{{level}}</option>
         </select>
         <div [hidden]="level.valid || level.pristine" class="alert alert-danger">
           Hiking level is required
@@ -32,7 +32,7 @@
       </div>
       <div class="form-group">
         <label for="duration">Hiking duration in hours (eg. 4)*</label>
-        <input type="number"  step = "1" class="form-control" required [(ngModel)]="model.duration" ngControl="duration"  #duration="ngForm"/>
+        <input type="number"  step = "1" class="form-control" required [(ngModel)]="model.duration" name="duration"  #duration="ngModel"/>
         <div [hidden]="duration.valid || duration.pristine" class="alert alert-danger">
           Hiking duration is required
         </div>
@@ -40,7 +40,7 @@
       
       <div class="form-group">
         <label for="string">Hiking positive elevation in meters (eg. 600) *</label>
-        <input type="number"  step="50" class="form-control" required [(ngModel)]="model.elevation" ngControl="elevation"  #elevation="ngForm" />
+        <input type="number"  step="50" class="form-control" required [(ngModel)]="model.elevation" name="elevation"  #elevation="ngModel" />
         <div [hidden]="elevation.valid || elevation.pristine" class="alert alert-danger">
           Hiking elevation is required
         </div>
@@ -49,7 +49,7 @@
       <div class="form-group">
         <label for="number">Maximum number of participants (eg. 20)*</label>
         <input type="number"  step = "1" class="form-control" required
-            [(ngModel)]="model.numberOfPeople" ngControl="number"  #numberOfPeople="ngForm" value="20"/>
+            [(ngModel)]="model.numberOfPeople" name="number"  #numberOfPeople="ngModel" value="20"/>
         <div [hidden]="numberOfPeople.valid || numberOfPeople.pristine" class="alert alert-danger">
           Maximum number of participants is required
         </div>
@@ -58,7 +58,7 @@
       <div class="form-group">
             <label for="string">Meeting point time (eg. 01/01/2016 10:00) *</label>
             <div class="input-group date datetimepicker">
-                <input type="text" class="gllpSearchButton" class="form-control" [(ngModel)]="model.date" ngControl="date"  #date="ngForm" id="date" />
+                <input type="text" class="gllpSearchButton" class="form-control" [(ngModel)]="model.date" name="date"  #date="ngModel" id="date" />
                 <span class="input-group-addon">
                     <span class="glyphicon glyphicon-calendar"></span>
                 </span>
@@ -67,14 +67,14 @@
       
       <div class="form-group">
         <label for="level">Meeting point location *</label>
-        <p *ngFor="#venue of venues">
+        <p *ngFor="let venue of venues">
               <input type="radio" name="optradio" (click)="selectVenue(venue)" required /> {{venue.displayName}}
         </p>
       </div>
       
       <div class="form-group" *ngIf="newVenue">
         <label for="name">Meeting point name *</label>
-        <input type="text" class="form-control" required [(ngModel)]="model.venue.name" ngControl="venueName"  #venueName="ngForm"/>
+        <input type="text" class="form-control" required [(ngModel)]="model.venue.name" name="venueName"  #venueName="ngModel"/>
         <div [hidden]="venueName.valid || venueName.pristine" class="alert alert-danger">
           Meeting point name is required
         </div>
@@ -82,7 +82,7 @@
       
       <div class="form-group" *ngIf="newVenue">
         <label for="name">Meeting point address *</label>
-        <input type="text" class="form-control" required [(ngModel)]="model.venue.address" ngControl="address"  #address="ngForm"/>
+        <input type="text" class="form-control" required [(ngModel)]="model.venue.address" name="address"  #address="ngModel"/>
         <div [hidden]="address.valid || address.pristine" class="alert alert-danger">
           Meeting point address is required
         </div>
@@ -90,7 +90,7 @@
       
       <div class="form-group" *ngIf="newVenue">
         <label for="name">Meeting point city *</label>
-        <input type="text" class="form-control" required [(ngModel)]="model.venue.city" ngControl="city"  #city="ngForm"/>
+        <input type="text" class="form-control" required [(ngModel)]="model.venue.city" name="city"  #city="ngModel"/>
         <div [hidden]="city.valid || city.pristine" class="alert alert-danger">
           Meeting point city is required
         </div>
@@ -109,12 +109,12 @@
       
       <div class="form-group">
         <label for="link">Hiking link (eg. http://www.randoxygene.org/pge/rando_pe/affiche_rando.php?rubrique=1&zone=3&rando=28&current=pc-8&ct=pc)</label>
-        <input type="text" class="form-control" [(ngModel)]="model.link" ngControl="link"  #link="ngForm"/>
+        <input type="text" class="form-control" [(ngModel)]="model.link" name="link"  #link="ngModel"/>
       </div>
       
       <div class="form-group">
         <label for="string">Additional informations (eg. Don't forget to take your flash light)</label>
-        <textarea rows="4" cols="50" class="form-control" [(ngModel)]="model.additionalInfo" ngControl="additionalInfo"  #additionalInfo="ngForm"></textarea>
+        <textarea rows="4" cols="50" class="form-control" [(ngModel)]="model.additionalInfo" name="additionalInfo"  #additionalInfo="ngModel"></textarea>
       </div>
       
       <p>* Required fields</p>

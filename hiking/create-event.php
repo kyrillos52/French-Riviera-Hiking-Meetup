@@ -17,7 +17,7 @@ if(isAuthenticated()) {
 	include 'head.php';
 	?>
 	    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
-	    <link rel="stylesheet" href="styles.css">
+	    <link rel="stylesheet" href="css/styles.css">
 	    
 	    <!-- Dependencies: JQuery and GMaps API should be loaded first -->
 		<script src="https://code.jquery.com/jquery-2.2.1.min.js"></script>
@@ -33,32 +33,18 @@ if(isAuthenticated()) {
 	    
 	    <link rel="stylesheet" href="node_modules/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css" />
 	    <script type="text/javascript" src="node_modules/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js"></script>
-	    
+
 	
 	    <!-- 1. Load libraries -->
-	    <!-- IE required polyfills, in this exact order -->
-	    <script src="ie-fix.js"></script>
-	    <script src="https://cdnjs.cloudflare.com/ajax/libs/es6-shim/0.33.3/es6-shim.min.js"></script>
-	    <script src="https://cdnjs.cloudflare.com/ajax/libs/systemjs/0.19.16/system-polyfills.js"></script>
-	
-	    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/2.0.0-beta.15/angular2-polyfills.min.js"></script>
-	    <script src="https://cdnjs.cloudflare.com/ajax/libs/systemjs/0.19.22/system.js"></script>
-	    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/2.0.0-beta.15/Rx.min.js"></script>
-	    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/2.0.0-beta.15/http.min.js"></script>
-	    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/2.0.0-beta.15/angular2.js"></script>
-	
+	     <!-- Polyfill(s) for older browsers -->
+	    <script src="node_modules/core-js/client/shim.min.js"></script>
+	    <script src="node_modules/zone.js/dist/zone.js"></script>
+	    <script src="node_modules/reflect-metadata/Reflect.js"></script>
+	    <script src="node_modules/systemjs/dist/system.src.js"></script>
 	    <!-- 2. Configure SystemJS -->
+	    <script src="systemjs.config.js"></script>
 	    <script>
-	      System.config({
-	        packages: {        
-	          app: {
-	            format: 'register',
-	            defaultExtension: 'js'
-	          }
-	        }
-	      });
-	      System.import('app/main')
-	            .then(null, console.error.bind(console));
+	      System.import('app/main').catch(function(err){ console.error(err); });
 	    </script>
   </head>
   <body>

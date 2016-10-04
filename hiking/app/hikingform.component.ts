@@ -1,9 +1,8 @@
-import {Component, ElementRef, OnInit, Inject} from 'angular2/core';
-import {NgForm}    from 'angular2/common';
+import {Component, ElementRef, OnInit, Inject} from '@angular/core';
 import { Hiking }    from './model/hiking';
 import { Venue }    from './model/venue';
 import {HikingService} from './hiking.service';
-import {HTTP_PROVIDERS}    from 'angular2/http';
+import {HttpModule}    from '@angular/http';
 
 declare var jQuery:any;
 
@@ -11,7 +10,7 @@ declare var jQuery:any;
   selector: 'hiking-form',
   templateUrl: 'app/template/hiking-form.component.html',
   providers: [
-        HTTP_PROVIDERS,
+        HttpModule,
         HikingService
     ]
 })
